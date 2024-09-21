@@ -1,0 +1,9 @@
+.box{
+    width: 19%;
+    aspect-ratio: 1;
+    font-size: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: white;
+    align-content: center;
+}

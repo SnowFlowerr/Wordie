@@ -1,0 +1,13 @@
+*{
+  box-sizing: border-box;
+}
+.App {
+  background-color: #282c34;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

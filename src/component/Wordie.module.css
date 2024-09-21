@@ -1,0 +1,31 @@
+.mainBox{
+    width: 550px;
+    /* min-height: 650px; */
+    border: 1px solid white;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.container{
+    width: 100%;
+    aspect-ratio: 1;
+}
+.column{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+}
+.letters{
+    width: 19%;
+    aspect-ratio: 1;
+    font-size: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1%;
+}
+.submit{
+    width: 100%;
+    aspect-ratio: 20/2;
+    
+}
