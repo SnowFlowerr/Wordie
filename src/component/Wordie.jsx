@@ -71,7 +71,7 @@ export default function Wordie() {
             </div>
             
 
-            <button className={styles.submit} onClick={handleSubmit}>SUBMIT{word}</button>
+            <button className={styles.submit} onClick={handleSubmit}>SUBMIT</button>
 
         </div>
     )
