@@ -7,3 +7,8 @@
     background-color: white;
     align-content: center;
 }
+@media screen and (max-width:600px) {
+    .box{
+        font-size: 10vw;
+    }
+}

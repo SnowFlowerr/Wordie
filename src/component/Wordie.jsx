@@ -72,12 +72,12 @@ export default function Wordie() {
             setisword(()=>false)
             await inpRef.current[0].current.focus()
         }
-        if(boxes.length >= 5){
-            setLose(true)
-            setisword(true)
-        }
         if (value.join("").toLowerCase() === word) {
             setWin(true)
+            setisword(true)
+        }
+        else if(boxes.length >= 5){
+            setLose(true)
             setisword(true)
         }
     }
@@ -95,9 +95,9 @@ export default function Wordie() {
     function key(e) {
         const key=e.key
         // console.log(key)
-        if(key===" " && currentind < 4){
+        if(key.toLowerCase()==="enter" && value.join("").length === 5 && isword){
             // inpRef.current[currentind + 1].current.focus()
-            console.log(key)
+            handleSubmit()
         }
         else if((key.toLowerCase()==="delete" || key.toLowerCase()==="backspace") && currentind > 0 && value[currentind]===""){
             inpRef.current[currentind - 1].current.focus()
