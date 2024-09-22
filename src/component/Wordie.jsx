@@ -15,13 +15,13 @@ export default function Wordie() {
 
     useEffect(() => {
         getWords()
-        
+
     }, [])
     async function getWords() {
         try {
             const w = await axios.get('https://random-word-api.vercel.app/api?words=1&length=5')
             setWord(w.data[0])
-            if(inpRef.current[0].current){
+            if (inpRef.current[0].current) {
                 await inpRef.current[0].current.focus()
             }
         }
@@ -67,16 +67,16 @@ export default function Wordie() {
     }, [value])
     async function handleSubmit() {
         if (boxes.length <= 5) {
-            setBoxes(()=>[...boxes, value])
-            setValue(()=>["", "", "", "", ""])
-            setisword(()=>false)
+            setBoxes(() => [...boxes, value])
+            setValue(() => ["", "", "", "", ""])
+            setisword(() => false)
             await inpRef.current[0].current.focus()
         }
         if (value.join("").toLowerCase() === word) {
             setWin(true)
             setisword(true)
         }
-        else if(boxes.length >= 5){
+        else if (boxes.length >= 5) {
             setLose(true)
             setisword(true)
         }
@@ -93,13 +93,13 @@ export default function Wordie() {
         setCurrentind(ind)
     }
     function key(e) {
-        const key=e.key
+        const key = e.key
         // console.log(key)
-        if(key.toLowerCase()==="enter" && value.join("").length === 5 && isword){
+        if (key.toLowerCase() === "enter" && value.join("").length === 5 && isword) {
             // inpRef.current[currentind + 1].current.focus()
             handleSubmit()
         }
-        else if((key.toLowerCase()==="delete" || key.toLowerCase()==="backspace") && currentind > 0 && value[currentind]===""){
+        else if ((key.toLowerCase() === "delete" || key.toLowerCase() === "backspace") && currentind > 0 && value[currentind] === "") {
             inpRef.current[currentind - 1].current.focus()
             // console.log(currentind)
         }
@@ -107,29 +107,27 @@ export default function Wordie() {
     return (
         <div className={styles.mainBox}>
             <div className={styles.container}>
-                
                 <>
-                <div className={styles.smallCont}>
-                    {boxes.map((element, index) =>
-                        <div className={styles.column} key={index}>
-                            {element.map((ele, ind) =>
-                                <Box key={ind} index={ind} element={ele} word={word} />
-                            )}
-                        </div>
-                    )}
-                </div>
-                <div className={styles.column}>
-                    {boxes.length <= 5 && !win &&
-                        word.split("").map((element, index) =>
-                            <input type="text" key={index} className={styles.letters} maxLength={1} value={value[index]} onChange={(e) => handleChange(e, index)} ref={inpRef.current[index]} onFocus={()=>handleFocus(index)} onKeyDown={key}/>
+                    <div className={styles.smallCont}>
+                        {boxes.map((element, index) =>
+                            <div className={styles.column} key={index}>
+                                {element.map((ele, ind) =>
+                                    <Box key={ind} index={ind} element={ele} word={word} />
+                                )}
+                            </div>
                         )}
-                </div>
+                    </div>
+                    <div className={styles.column}>
+                        {boxes.length <= 5 && !win &&
+                            word.split("").map((element, index) =>
+                                <input type="text" key={index} className={styles.letters} maxLength={1} value={value[index]} onChange={(e) => handleChange(e, index)} ref={inpRef.current[index]} onFocus={() => handleFocus(index)} onKeyDown={key} style={isword && value.join("").length===5  ? {backgroundColor:"white"} : { background: "rgb(220, 220, 220)" }}/>
+                            )
+                        }
+                    </div>
                 </>
-                {(win || lose) && <div className={styles.message}>{win && "YOU WON"}{lose && "YOU LOSE"}</div>}
-                
+                {(win || lose) && <div className={styles.message}>{win && "YOU WON"}{lose && <>{word} <br /> {"YOU LOSE"}</>}</div>}
             </div>
-            <button className={styles.submit} onClick={win || lose ? handleRestart : isword ? handleSubmit : null} style={isword ? {} : { background: "gray" }}>{win || lose ? "RESTART" : "SUBMIT"}</button>
-            
+            <button className={styles.submit} onClick={win || lose ? handleRestart : isword ? handleSubmit : null} style={isword && value.join("").length===5 ? {background: "white"} : { background: "gray" }}>{win || lose ? "RESTART" : "SUBMIT"}</button>
         </div>
     )
 }
